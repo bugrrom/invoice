@@ -1,0 +1,41 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "yarn initialDatabase && ts-node ./src/index.ts",
+    "dev": "nodemon",
+    "initialDatabase": "ts-node ./src/initializingDatabase/seeder.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "^7.1.1",
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "bullmq": "^1.14.7",
+    "connect-mongo": "^3.2.0",
+    "cors": "^2.8.5",
+    "debug": "^4.3.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "handlebars": "^4.7.7",
+    "ioredis": "^4.22.0",
+    "mongoose": "5.11.15",
+    "nodemailer": "^6.4.18",
+    "nodemailer-mailgun-transport": "^2.0.2",
+    "puppeteer": "^7.1.0",
+    "ts-node": "^9.1.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.15.1",
+    "@typescript-eslint/parser": "^4.15.1",
+    "eslint": "^7.20.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
+    "typescript": "^4.1.5"
+  }
+}

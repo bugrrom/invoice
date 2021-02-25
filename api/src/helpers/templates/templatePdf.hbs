@@ -1,0 +1,150 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        .logo {
+            width: 70px;
+            height: 70px;
+            background: orange;
+            border-radius: 50%;
+            border: 3px solid white;
+            color: white;
+            font-size: 40px;
+            font-weight: 600;
+            position: relative;
+            left: 50%;
+            margin-left: -35px;
+            line-height: 70px;
+        }
+        .information p {
+            padding: 0;
+            margin: 2px 0;
+            color: #5b5971;
+            font-weight: 100;
+            font-size: 13px;
+        }
+        .informationBlock {
+            border-bottom: 1px solid #cccccc;
+            padding: 11px 0;
+        }
+        .informationBlock p {
+            width: 100%;
+            color: #5b5971;
+            font-size: 14px;
+            padding: 0;
+        }
+        .blockPrice{
+
+        }
+        .blockPrice p {
+            color: #49484e;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .activeText {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            color: #333333;
+            font-weight: 600;
+            text-align: center;
+        }
+        .shadowText {
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+            color: #525252;
+            text-align: center;
+        }
+        @media print {
+            header {
+                -webkit-print-color-adjust: exact;
+            }
+
+            footer {
+                -webkit-print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0;">
+<div>
+    <header style="width: 100%; padding: 20px 0; background: #5b5971; text-align: center; position: relative;" >
+        <div class="logo">b w</div>
+        <div style="margin-top: 20px; color: white; font-weight: 100; letter-spacing: 1px;">Brick and Willow Design</div>
+    </header>
+    <div style="width: 85%; margin: 0 auto">
+        <div style="padding: 20px; border-bottom: 1px solid #cccccc; text-align: center">
+            <h4 style="color: #5b5971;margin: 0;padding: 0;font-size: 30px;font-weight: 100;">New Invoice</h4>
+            <p style="color: #5b5971;">$ {{price}} due on {{date}}</p>
+            <button style="width: 250px;height: 40px;color: white;border: none;background-color: #5b5971;font-weight: 600;border-radius: 3px;">Pay Invoice</button>
+        </div>
+        <div style="border-bottom: 1px solid #cccccc;">
+            <div>
+                <h4 style="margin: 5px 0;color: #5b5971; font-size: 16px;">Invoice #{{number}}</h4>
+                <p style="margin: 0;padding: 0;color: #5b5971;font-weight: 100;font-size: 13px;">{{date}}</p>
+            </div>
+            <div class="information">
+                <h5 style="margin: 5px 0; color: #5b5971; font-size: 14px;">Customer</h5>
+                <p>{{firstName}} {{lastName}}</p>
+                <p>{{email}}</p>
+            </div>
+            <div class="information">
+                <h5 style="margin: 5px 0; color: #5b5971; font-size: 14px;">Company</h5>
+                <p>{{nameCompany}}</p>
+                <p>{{emailCompany}}</p>
+                <p>{{addressCompany}}</p>
+            </div>
+        </div>
+        <div class="informationBlock">
+            <p>Et harum quidem rerum facilis est et expedita distinctio, quis nostrum exercitationem ullam corporis
+                suscipit laboriosam, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt,
+                explicabo.
+            </p>
+        </div>
+        <div class="informationBlock">
+            <p>Et harum quidem rerum facilis est et expedita distinctio, quis nostrum exercitationem ullam corporis
+                suscipit laboriosam, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt,
+                explicabo.
+            </p>
+        </div>
+        <div style="border-bottom: 1px solid #cccccc;">
+            <div class="blockPrice">
+                <p style="float: left; width:50%;display: inline-block">Email Template Design</p>
+                <p style="text-align: right; width:50%;display: inline-block" >$0</p>
+            </div>
+            <div class="blockPrice">
+                <p style="float: left; width:50%; display: inline-block" >Email Template Development</p>
+                <p style="text-align: right; width:50%; display: inline-block" >${{price}}</p>
+            </div>
+        </div>
+        <div style="border-bottom: 1px solid #cccccc;">
+            <div style=" margin: 5px 0;">
+                <p style="float: left; width:50%; display: inline-block">Subtotal</p>
+                <p style="text-align: right; width:50%; display: inline-block">${{price}}</p>
+            </div>
+            <div style=" margin: 5px 0;">
+                <p style="float: left; width:50%; display: inline-block">Tax</p>
+                <p style="text-align: right; width:50%; display: inline-block" >${{tax}}</p>
+            </div>
+        </div>
+        <div style="margin: 10px 0;">
+            <p style="font-size: 18px; font-weight: 600; color: #49484e; float: left; width:50%; display: inline-block">Total Due</p>
+            <p style="font-size: 18px; font-weight: 600; color: #49484e; text-align: right; width:50%; display: inline-block">${{price}}</p>
+        </div>
+    </div>
+</div>
+<footer style="align-items: center;background: #f1f1f1;border-top: 1px solid #dadada;">
+    <div style="margin: 30px 0;align-items: center;">
+        <p class="activeText">Brick and Willow Design</p>
+        <p class="shadowText">101 Main Street, San Francisco, CA 94105</p>
+        <p class="shadowText">415-555-4721</p>
+    </div>
+    <div style="align-items: center;margin: 10px auto;">
+        <p class="activeText">Security | Privacy</p>
+        <p class="shadowText">2018 Square, Inc.</p>
+    </div>
+</footer>
+</body>
+</html>
