@@ -11,9 +11,9 @@ services:
       - PORT=4000
       - DB_URL=mongodb://api_db:27017
       - REDIS=redis://cache
-      - EMAIL=
-      - API_KEY_MAILGAN=
-      - DOMAIN_MAILGAN=
+      - EMAIL=bugrom@mail.ru
+      - API_KEY_MAILGAN=715cdc72939ad4e54d208750932ced63-d32d817f-af12a5fa
+      - DOMAIN_MAILGAN=sandboxc3e85056266e4db2a2a62f6ed9078b3d.mailgun.org
     depends_on:
       - redis_db
       - api_db

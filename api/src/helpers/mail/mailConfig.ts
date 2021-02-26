@@ -12,17 +12,19 @@ export const mailgunAuth = {
     domain: process.env.DOMAIN_MAILGAN,
   },
 };
+ 
+export const getMailOptions = (email: string) => {
+  const template = handlebars.compile(emailTemplateSource);
 
-const template = handlebars.compile(emailTemplateSource);
+  const htmlToSend = template({ message: "Hello!" });
 
-const htmlToSend = template({ message: "Hello!" });
-
-export const mailOptions = {
-  from: "myemail@example.com",
-  to: process.env.EMAIL,
-  subject: "EMAIL SUBJECT LINE",
-  html: htmlToSend,
-  attachments: [
-    { filename: "index.pdf", path: path.join("./uploads/index.pdf") },
-  ],
+  return {
+    from: "myemail@example.com",
+    to: process.env.EMAIL,
+    subject: "EMAIL SUBJECT LINE",
+    html: htmlToSend,
+    attachments: [
+      { filename: "index.pdf", path: path.join(`./uploads/${email}.pdf`) },
+    ],
+  };
 };

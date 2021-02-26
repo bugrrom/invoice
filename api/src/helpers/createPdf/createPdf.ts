@@ -76,7 +76,7 @@ export const createPdf = async ({
   const dateTransform = new Date(date);
   const createNewDate = [
     dateTransform.getDate(),
-    dateTransform.getMonth(),
+    dateTransform.getMonth() + 1,
     dateTransform.getFullYear(),
   ];
   const htmlToSend = template({
@@ -94,7 +94,7 @@ export const createPdf = async ({
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.setContent(htmlToSend);
-  await page.pdf({ path: "./uploads/index.pdf", format: "A4" });
+  await page.pdf({ path: `./uploads/${email}.pdf`, format: "A4" });
   await browser.close();
   console.log("PDF Generated");
 };

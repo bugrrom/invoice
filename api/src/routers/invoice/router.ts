@@ -40,7 +40,7 @@ export const getInvoice = async (req: Request, res: Response) => {
           };
           await createPdf(customer);
         } else if (w.name === "send") {
-          await sendMassage();
+          await sendMassage(user.email);
         }
       },
       { connection }
