@@ -12,7 +12,7 @@ export const mailgunAuth = {
     domain: process.env.DOMAIN_MAILGAN,
   },
 };
- 
+
 export const getMailOptions = (email: string) => {
   const template = handlebars.compile(emailTemplateSource);
 
@@ -20,7 +20,7 @@ export const getMailOptions = (email: string) => {
 
   return {
     from: "myemail@example.com",
-    to: process.env.EMAIL,
+    to: email,
     subject: "EMAIL SUBJECT LINE",
     html: htmlToSend,
     attachments: [

@@ -111,14 +111,12 @@
             </p>
         </div>
         <div style="border-bottom: 1px solid #cccccc;">
+            {{#each listOfWorks}}
             <div class="blockPrice">
-                <p style="float: left; width:50%;display: inline-block">Email Template Design</p>
-                <p style="text-align: right; width:50%;display: inline-block" >$0</p>
+                <p style="float: left; width:50%;display: inline-block">{{this.project}}</p>
+                <p style="text-align: right; width:50%;display: inline-block" >$ {{this.price}}</p>
             </div>
-            <div class="blockPrice">
-                <p style="float: left; width:50%; display: inline-block" >Email Template Development</p>
-                <p style="text-align: right; width:50%; display: inline-block" >${{price}}</p>
-            </div>
+            {{/each}}
         </div>
         <div style="border-bottom: 1px solid #cccccc;">
             <div style=" margin: 5px 0;">

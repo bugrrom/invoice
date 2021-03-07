@@ -8,4 +8,3 @@ export const router = express.Router();
 router.post("/", [validator(invoice)], getInvoice);
 
 export { router as invoice };
-

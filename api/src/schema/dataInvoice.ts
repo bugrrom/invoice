@@ -1,14 +1,3 @@
-const listOfWork = {
-  type: "object",
-  properties: {
-    price: {
-      type: "number",
-    },
-    project: {
-      type: "string",
-    },
-  },
-};
 export const invoice = {
   type: "object",
   properties: {

@@ -22,6 +22,8 @@ type typeProps = {
     address: string;
   };
   price: number;
+  number: number;
+  listOfWorks: { price: number; project: string }[];
 };
 
 /*export const createPdf = async ({
@@ -71,30 +73,40 @@ export const createPdf = async ({
   lastName,
   date,
   price,
+  number,
+  listOfWorks,
 }: typeProps) => {
-  const template = await handlebars.compile(html);
-  const dateTransform = new Date(date);
-  const createNewDate = [
-    dateTransform.getDate(),
-    dateTransform.getMonth() + 1,
-    dateTransform.getFullYear(),
-  ];
-  const htmlToSend = template({
-    firstName,
-    email,
-    lastName,
-    date: createNewDate.join(" "),
-    nameCompany: company.name,
-    emailCompany: company.email,
-    addressCompany: company.address,
-    price,
-    number: 12,
-    tax: 0,
-  });
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.setContent(htmlToSend);
-  await page.pdf({ path: `./uploads/${email}.pdf`, format: "A4" });
-  await browser.close();
-  console.log("PDF Generated");
+  try {
+    const template = await handlebars.compile(html);
+    const dateTransform = new Date(date);
+    const createNewDate = [
+      dateTransform.getDate(),
+      dateTransform.getMonth() + 1,
+      dateTransform.getFullYear(),
+    ];
+    const htmlToSend = template({
+      firstName,
+      email,
+      lastName,
+      date: createNewDate.join(" "),
+      nameCompany: company.name,
+      emailCompany: company.email,
+      addressCompany: company.address,
+      price,
+      number: number,
+      tax: 0,
+      listOfWorks: JSON.parse(JSON.stringify(listOfWorks)),
+    });
+    const browser = await puppeteer.launch({
+      executablePath: process.env.CHROMIUM_PATH,
+      args: ["--no-sandbox"],
+    });
+    const page = await browser.newPage();
+    await page.setContent(htmlToSend);
+    await page.pdf({ path: `./uploads/${email}.pdf`, format: "A4" });
+    await browser.close();
+    console.log("PDF Generated");
+  } catch (e) {
+    console.log(e);
+  }
 };
