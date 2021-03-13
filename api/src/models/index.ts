@@ -1,2 +1,2 @@
-export { User, IUser } from "./User";
-export { IInvoiceLog, InvoiceLog } from "./InvoiceLog";
+export { User, typeUser } from "./User";
+export { typeInvoiceLog, InvoiceLog } from "./InvoiceLog";

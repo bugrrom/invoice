@@ -1,10 +1,8 @@
-import { Subscriber } from "../../helpers/subscribers/subscriber";
-import { queueGeneratePdfAndLetter } from "../../helpers/queue/queue";
+import { workerRequest } from "../../helpers/subscribers/subscriber";
+import {queueIncomingRequests} from "../../helpers/queue/queue";
 
 export class GenerationControllers {
   async generatePdfAndSendLetter(data, log): Promise<void> {
-    await queueGeneratePdfAndLetter.add("pdf", { message: "pdf" });
-    await queueGeneratePdfAndLetter.add("send", { message: "send" });
     const allPrice = log.listOfWorks.reduce(
       (prev, price) => prev + price.price,
       0
@@ -19,7 +17,7 @@ export class GenerationControllers {
       number: log.number,
       listOfWorks: log.listOfWorks,
     };
-    const sub = new Subscriber({ serviceName: "FIFO" });
-    await sub.workerCreatePdfAndSendLetter(customer);
+    await queueIncomingRequests.add("request", { customer });
+    await workerRequest();
   }
 }

@@ -14,14 +14,15 @@ export const getInvoice = async (req: Request, res: Response) => {
 
   try {
     const { email, listOfWorks } = req.body;
-    const log = await InvoiceLogControllers.createInvoiceLog({
+    const log = new InvoiceLogControllers();
+    const logData = await log.createInvoiceLog({
       email,
       listOfWorks,
     });
     const data = new UserControllers();
     const user = await data.getUserByEmail({ email });
     const generate = new GenerationControllers();
-    await generate.generatePdfAndSendLetter(user, log);
+    await generate.generatePdfAndSendLetter(user, logData);
     res.status(200).json(user);
   } catch (e) {
     res.status(400);

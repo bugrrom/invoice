@@ -13,7 +13,7 @@ export const mailgunAuth = {
   },
 };
 
-export const getMailOptions = (email: string) => {
+export const getMailOptions = (email: string, number: number) => {
   const template = handlebars.compile(emailTemplateSource);
 
   const htmlToSend = template({ message: "Hello!" });
@@ -24,7 +24,7 @@ export const getMailOptions = (email: string) => {
     subject: "EMAIL SUBJECT LINE",
     html: htmlToSend,
     attachments: [
-      { filename: "index.pdf", path: path.join(`./uploads/${email}.pdf`) },
+      { filename: "index.pdf", path: path.join(`./uploads/${number}.pdf`) },
     ],
   };
 };

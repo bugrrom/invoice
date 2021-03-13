@@ -1,24 +1,26 @@
-import { InvoiceLog, IInvoiceLog } from "../../models";
-import { typeInvoiceLog, typeReturnInvoiceLog } from "./typeInvoiceLog";
+import { InvoiceLog } from "../../models";
+import {
+  typeInvoiceLogController,
+  typeReturnInvoiceLog,
+} from "./typeInvoiceLog";
 
-export const InvoiceLogControllers = {
-  createInvoiceLog: async ({
+export class InvoiceLogControllers {
+  async createInvoiceLog({
     email,
     listOfWorks,
-  }: typeInvoiceLog): Promise<typeReturnInvoiceLog> => {
-    return InvoiceLog.create({ email, listOfWorks })
-      .then(async (data: IInvoiceLog) => {
-        const number = await InvoiceLog.find().countDocuments();
-        const newData = {
-          number,
-          email: data.email,
-          listOfWorks: data.listOfWorks,
-          createdAt: data.createdAt,
-        };
-        return newData;
-      })
-      .catch((error: Error) => {
-        throw error;
-      });
-  },
-};
+  }: typeInvoiceLogController): Promise<typeReturnInvoiceLog> {
+    try {
+      const data = await InvoiceLog.create({ email, listOfWorks });
+      const number = await InvoiceLog.find().countDocuments();
+      const newData = {
+        number,
+        email: data.email,
+        listOfWorks: data.listOfWorks,
+        createdAt: data.createdAt,
+      };
+      return newData;
+    } catch (error) {
+      throw error;
+    }
+  }
+}

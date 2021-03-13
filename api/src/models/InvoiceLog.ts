@@ -7,11 +7,11 @@ type listOfWorks = {
   project: string;
 };
 
-export interface IInvoiceLog extends mongoose.Document {
+export type typeInvoiceLog = mongoose.Document & {
   email: string;
   listOfWorks: listOfWorks[];
   createdAt: string;
-}
+};
 
 const listOfWork: mongoose.Schema = new Schema({
   price: {
@@ -37,4 +37,4 @@ const InvoiceLogSchema: mongoose.Schema = new Schema(
   }
 );
 
-export const InvoiceLog = model<IInvoiceLog>("InvoiceLog", InvoiceLogSchema);
+export const InvoiceLog = model<typeInvoiceLog>("InvoiceLog", InvoiceLogSchema);

@@ -2,7 +2,7 @@ import * as mongoose from "mongoose";
 
 const { Schema, model } = mongoose;
 
-export interface IUser extends mongoose.Document {
+export type typeUser = mongoose.Document & {
   email: string;
   firstName: string;
   lastName: string;
@@ -12,7 +12,7 @@ export interface IUser extends mongoose.Document {
     email: string;
   };
   createdAt?: string;
-}
+};
 
 const UserSchema: mongoose.Schema = new Schema(
   {
@@ -48,4 +48,4 @@ const UserSchema: mongoose.Schema = new Schema(
   }
 );
 
-export const User = model<IUser>("User", UserSchema);
+export const User = model<typeUser>("User", UserSchema);

@@ -6,9 +6,10 @@ import { Request, Response, Application } from "express";
 //Initialization
 import "./db";
 import { devModeLogs } from "./helpers/devModeLogs";
-const app: Application = express();
 //Routers
 import { invoice } from "./routers/invoice";
+
+const app: Application = express();
 
 app.use(
   bodyParser.json({

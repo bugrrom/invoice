@@ -103,7 +103,7 @@ export const createPdf = async ({
     });
     const page = await browser.newPage();
     await page.setContent(htmlToSend);
-    await page.pdf({ path: `./uploads/${email}.pdf`, format: "A4" });
+    await page.pdf({ path: `./uploads/${number}.pdf`, format: "A4" });
     await browser.close();
     console.log("PDF Generated");
   } catch (e) {

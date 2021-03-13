@@ -1,8 +1,8 @@
-import { User, IUser } from "../../models";
+import { User, typeUser } from "../../models";
 import { getUserByEmail } from "./typeUserControlers";
 
 export class UserControllers {
-  async getUserByEmail(email: getUserByEmail): Promise<IUser> {
+  async getUserByEmail(email: getUserByEmail): Promise<typeUser> {
     try {
       const data = await User.findOne(email);
       return data;
