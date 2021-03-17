@@ -1,25 +1,21 @@
 {
-  "name": "api",
+  "name": "api_create_letter",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "yarn initialDatabase && ts-node ./src/index.ts",
-    "dev": "nodemon",
-    "initialDatabase": "ts-node ./src/initializingDatabase/seeder.ts"
+    "start": "ts-node ./src/index.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ajv": "^7.1.1",
     "bullmq": "^1.14.7",
-    "connect-mongo": "^3.2.0",
-    "cors": "^2.8.5",
     "debug": "^4.3.1",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "handlebars": "^4.7.7",
     "ioredis": "^4.22.0",
-    "mongoose": "5.11.15",
+    "nodemailer": "^6.5.0",
+    "nodemailer-mailgun-transport": "^2.0.2",
     "ts-node": "^9.1.1"
   },
   "devDependencies": {

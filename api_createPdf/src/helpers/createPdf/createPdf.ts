@@ -97,6 +97,7 @@ export const createPdf = async ({
       tax: 0,
       listOfWorks: JSON.parse(JSON.stringify(listOfWorks)),
     });
+    // using the chrome process in docker container
     const browser = await puppeteer.launch({
       executablePath: process.env.CHROMIUM_PATH,
       args: ["--no-sandbox"],

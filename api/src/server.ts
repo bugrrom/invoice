@@ -5,9 +5,9 @@ import * as cors from "cors";
 import { Request, Response, Application } from "express";
 //Initialization
 import "./db";
-import { devModeLogs } from "./helpers/devModeLogs";
+import { devModeLogs } from "./helpers";
 //Routers
-import { invoice } from "./routers/invoice";
+import invoice from "./routers/invoice";
 
 const app: Application = express();
 

@@ -22,8 +22,8 @@ export const getInvoice = async (req: Request, res: Response) => {
     const data = new UserControllers();
     const user = await data.getUserByEmail({ email });
     const generate = new GenerationControllers();
-    await generate.generatePdfAndSendLetter(user, logData);
-    res.status(200).json(user);
+    await generate.generatePdf(logData, user);
+    res.status(200).json(email);
   } catch (e) {
     res.status(400);
   }

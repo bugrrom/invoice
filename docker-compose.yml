@@ -11,14 +11,44 @@ services:
       - PORT=4000
       - DB_URL=mongodb://api_db:27017
       - REDIS=redis://cache
-      - EMAIL=
-      - API_KEY_MAILGAN=
-      - DOMAIN_MAILGAN=
+      - EMAIL=bugrom@mail.ru
     depends_on:
       - redis_db
       - api_db
     networks:
       - invoice-network
+
+  api_create_pdf:
+    build: ./api_createPdf
+    command: npm run start
+    restart: unless-stopped
+    environment:
+      - DB_URL=mongodb://api_db:27017
+      - REDIS=redis://cache
+    depends_on:
+      - api
+      - redis_db
+    networks:
+      - invoice-network
+    volumes:
+      - pdf_file:/usr/src/app/uploads
+
+  api_send_letters:
+    build: ./api_sendLetter
+    command: npm run start
+    restart: unless-stopped
+    environment:
+      - DB_URL=mongodb://api_db:27017
+      - REDIS=redis://cache
+      - API_KEY_MAILGAN=d5f44b6cf7a0aec7e99b38f3e16e1bc5-e49cc42c-7214ba94
+      - DOMAIN_MAILGAN=sandbox102c51c568644521a0edf7577ab5a47d.mailgun.org
+    depends_on:
+      - api
+      - redis_db
+    networks:
+      - invoice-network
+    volumes:
+      - pdf_file:/usr/src/app/uploads
 
   redis_db:
     image: redis:latest
@@ -39,3 +69,6 @@ services:
 networks:
   invoice-network:
     driver: bridge
+
+volumes:
+  pdf_file:

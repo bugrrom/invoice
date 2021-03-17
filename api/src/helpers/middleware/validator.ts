@@ -2,7 +2,7 @@
 import Ajv from "ajv";
 
 // Instruments
-import { ValidationError } from "./errors";
+import { ValidationError } from "../errors";
 
 export const validator = (schema) => (req, res, next) => {
   const ajv = new Ajv({ allErrors: true });
