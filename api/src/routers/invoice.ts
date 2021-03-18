@@ -1,7 +1,7 @@
 import * as express from "express";
-import { getInvoice } from "./router";
-import { validator } from "../../helpers";
-import { invoice } from "../../schema";
+import { validator } from "../helpers";
+import { invoice } from "../schema";
+import { getInvoice } from "../controllers";
 
 export const router = express.Router();
 
