@@ -1,8 +1,11 @@
+import dg from "debug";
 import {
   typeInvoiceLogController,
   typeReturnInvoiceLog,
 } from "./typeInvoiceLog";
 import { InvoiceLog } from "../../models";
+
+const debugError = dg("router:invoice:debug");
 
 export const createInvoiceLog = async ({
   email,
@@ -19,6 +22,6 @@ export const createInvoiceLog = async ({
     };
     return newData;
   } catch (error) {
-    throw error;
+    debugError(`Error invoiceLog services: ${error.message} `);
   }
 };

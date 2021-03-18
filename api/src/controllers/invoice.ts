@@ -5,6 +5,7 @@ import { getUserByEmail } from "../services/user/userServices";
 import { generatePdf } from "../services/generateServices/generateServices";
 
 const debug = dg("router:invoice");
+const debugError = dg("router:invoice:debug");
 
 export const getInvoice = async (req: Request, res: Response) => {
   debug(`${req.method} - ${req.originalUrl}`);
@@ -15,7 +16,8 @@ export const getInvoice = async (req: Request, res: Response) => {
     const user = await getUserByEmail({ email });
     await generatePdf(logData, user);
     res.status(200).json(email);
-  } catch (e) {
-    res.status(400);
+  } catch (error) {
+    res.status(400).json();
+    debugError(`Error in getInvoice: ${error.message}`);
   }
 };

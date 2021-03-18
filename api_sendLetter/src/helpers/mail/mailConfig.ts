@@ -1,6 +1,7 @@
-const path = require("path");
-const fs = require("fs");
-const handlebars = require("handlebars");
+import path from "path";
+import fs from "fs";
+import handlebars from "handlebars";
+
 const emailTemplateSource = fs.readFileSync(
   path.join(__dirname, "../templates/templateLatter.hbs"),
   "utf8"

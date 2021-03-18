@@ -1,4 +1,7 @@
+import dg from "debug";
 import { typeUser, User } from "../../models";
+
+const debugError = dg("router:invoice:debug");
 
 export const getUserByEmail = async (email: {
   email: string;
@@ -7,6 +10,6 @@ export const getUserByEmail = async (email: {
     const data = await User.findOne(email);
     return data;
   } catch (error) {
-    throw error;
+    debugError(`Error user services: ${error.message}`);
   }
 };

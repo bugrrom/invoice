@@ -1,2 +1,2 @@
 export { connection } from "./redis";
-export { sendLetter } from "./mail/sendLetter";
+export { sendEmail } from "./mail/sendEmail";
