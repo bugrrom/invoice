@@ -1,7 +1,7 @@
 import dg from "debug";
 import { typeUser, User } from "../../models";
 
-const debugError = dg("router:invoice:debug");
+const debugError = dg("services:user:debug");
 
 export const getUserByEmail = async (email: {
   email: string;

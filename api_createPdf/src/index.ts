@@ -1,15 +1,16 @@
-import dg from "debug";
 import "./config";
+import dg from "debug";
 import { Worker } from "bullmq";
 import { connection } from "./helpers";
 import { createPdf } from "./helpers";
 import { queueGenerateLetterAndSend } from "./helpers";
 
-const debugError = dg("server: worker create pdf");
+const debug = dg("server: worker create pdf");
 
 const createPdfWorker = new Worker(
   "createPdf",
   async (data) => {
+    debug("init");
     const fooBar = data.data.customer;
     await createPdf(fooBar);
   },
@@ -24,5 +25,5 @@ createPdfWorker.on("completed", (data) => {
 });
 
 createPdfWorker.on("failed", (data) => {
-  debugError(`Error ${data.error}`);
+  debug(`Error ${data.error}`);
 });

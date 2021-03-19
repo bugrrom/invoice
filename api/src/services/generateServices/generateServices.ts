@@ -3,7 +3,7 @@ import { queueGeneratePdf } from "../../helpers";
 import { typeReturnInvoiceLog } from "../invoiceLog/typeInvoiceLog";
 import { typeUser } from "../../models";
 
-const debugError = dg("router:invoice:debug");
+const debugError = dg("services:invoice:debug");
 
 export const generatePdf = async (
   log: typeReturnInvoiceLog,

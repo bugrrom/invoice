@@ -1,13 +1,14 @@
 import dg from "debug";
-import nodemailer from "nodemailer";
-import mg from "nodemailer-mailgun-transport";
-import fs from "fs";
+import * as nodemailer from "nodemailer";
+import * as mg from "nodemailer-mailgun-transport";
+import * as fs from "fs";
 import { mailgunAuth, getMailOptions } from "./mailConfig";
 
 const debug = dg("sendMail");
 
 export const sendEmail = (email: string, number: number) => {
-  const smtpTransport = nodemailer.createTransport(mg(mailgunAuth));
+  const mailganConf = mg(mailgunAuth);
+  const smtpTransport = nodemailer.createTransport(mailganConf);
   return new Promise((resolve, reject) => {
     smtpTransport.sendMail(
       getMailOptions(email, number),

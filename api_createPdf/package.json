@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node ./src/index.ts",
-    "build": "rm -rf dist && build /src",
-    "start": "node dist"
+    "start": "ts-node ./src/index.ts"
   },
   "author": "",
   "license": "ISC",
