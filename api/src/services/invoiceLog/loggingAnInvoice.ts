@@ -5,9 +5,9 @@ import {
 } from "./typeInvoiceLog";
 import { InvoiceLog } from "../../models";
 
-const debugError = dg("router:invoice:debug");
+const debugError = dg("services:invoiceLog:debug");
 
-export const createInvoiceLog = async ({
+export const loggingAnInvoice = async ({
   email,
   listOfWorks,
 }: typeInvoiceLogController): Promise<typeReturnInvoiceLog> => {

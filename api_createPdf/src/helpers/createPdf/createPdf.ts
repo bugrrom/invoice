@@ -1,8 +1,12 @@
 import * as path from "path";
-import fs from "fs";
+import * as fs from "fs";
 import handlebars from "handlebars";
+import dg from "debug";
+
+const debug = dg("createPdf");
+
 const html = fs.readFileSync(
-  path.join(__dirname, "../templates/templatePdf.hbs"),
+  path.join(__dirname, "../../templates/templatePdf.hbs"),
   "utf8"
 );
 
@@ -63,8 +67,8 @@ export const createPdf = async ({
     await page.setContent(htmlToSend);
     await page.pdf({ path: `./uploads/${number}.pdf`, format: "A4" });
     await browser.close();
-    console.log("PDF Generated");
+    debug("PDF Generated");
   } catch (e) {
-    console.log(e);
+    debug(`Error ${e.message}`);
   }
 };

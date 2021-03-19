@@ -1,9 +1,9 @@
-import path from "path";
-import fs from "fs";
+import * as path from "path";
+import * as fs from "fs";
 import handlebars from "handlebars";
 
 const emailTemplateSource = fs.readFileSync(
-  path.join(__dirname, "../templates/templateLatter.hbs"),
+  path.join(__dirname, "../../templates/templateLatter.hbs"),
   "utf8"
 );
 
