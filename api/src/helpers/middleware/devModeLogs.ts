@@ -1,5 +1,6 @@
 import dg from "debug";
 import { Request, Response } from "express";
+
 const debug = dg("server:init");
 
 export const devModeLogs = (req: Request, res: Response, next) => {

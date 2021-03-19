@@ -1,7 +1,15 @@
+import dg from "debug";
 import { queueGeneratePdf } from "../../helpers";
+import { typeReturnInvoiceLog } from "../invoiceLog/typeInvoiceLog";
+import { typeUser } from "../../models";
 
-export class GenerationControllers {
-  async generatePdf(log, user): Promise<void> {
+const debugError = dg("router:invoice:debug");
+
+export const generatePdf = async (
+  log: typeReturnInvoiceLog,
+  user: typeUser
+): Promise<void> => {
+  try {
     const allPrice = log.listOfWorks.reduce(
       (prev, price) => prev + price.price,
       0
@@ -19,5 +27,7 @@ export class GenerationControllers {
     await queueGeneratePdf.add("pdf", {
       customer,
     });
+  } catch (error) {
+    debugError(`Error generate services: ${error.message}`);
   }
-}
+};

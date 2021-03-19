@@ -1,9 +1,12 @@
+import dg from "debug";
+import nodemailer from "nodemailer";
+import mg from "nodemailer-mailgun-transport";
+import fs from "fs";
 import { mailgunAuth, getMailOptions } from "./mailConfig";
-const nodemailer = require("nodemailer");
-const mg = require("nodemailer-mailgun-transport");
-const fs = require("fs");
 
-export const sendLetter = (email: string, number: number) => {
+const debug = dg("sendMail");
+
+export const sendEmail = (email: string, number: number) => {
   const smtpTransport = nodemailer.createTransport(mg(mailgunAuth));
   return new Promise((resolve, reject) => {
     smtpTransport.sendMail(
@@ -12,12 +15,14 @@ export const sendLetter = (email: string, number: number) => {
         if (error) {
           return reject(error);
         }
-        console.log("Successfully sent email.");
+        debug("Successfully sent email.");
         fs.unlink(`./uploads/${number}.pdf`, (err) => {
           if (err) {
             reject(err);
+            debug(`Error remove file: ${err}`);
           }
           resolve(response);
+          debug("file remove");
         });
       }
     );

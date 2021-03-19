@@ -1,10 +1,16 @@
+import dg from "debug";
 import "./config";
 import { Worker } from "bullmq";
-import { connection } from "./helpers";
-import { sendLetter } from "./helpers";
+import { connection, sendEmail } from "./helpers";
 
-new Worker(
+const debugError = dg("server: worker send email");
+
+const sendEmailWorker = new Worker(
   "createLetterAndSend",
-  (data) => sendLetter(data.data.email, data.data.number),
+  (data) => sendEmail(data.data.email, data.data.number),
   { connection }
 );
+
+sendEmailWorker.on("failed", (data) => {
+  debugError(`Error ${data.error}`);
+});
