@@ -37,8 +37,8 @@ services:
     restart: unless-stopped
     environment:
       - REDIS=redis://cache
-      - API_KEY_MAILGAN=33e81353986c5590c2296802c00ea53b-73e57fef-835957c8
-      - DOMAIN_MAILGAN=sandboxff937e9201a1427eb3f0ea3ebee091ac.mailgun.org
+      - API_KEY_MAILGAN=
+      - DOMAIN_MAILGAN=
     depends_on:
       - api
       - redis_db
