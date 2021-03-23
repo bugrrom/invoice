@@ -1,14 +1,17 @@
 import dg from "debug";
+import { Job } from "bullmq";
 import { queueGeneratePdf } from "../../helpers";
-import { typeReturnInvoiceLog } from "../invoiceLog/typeInvoiceLog";
-import { typeUser } from "../../models";
+import { typeReturnInvoiceLog } from "..";
+import { queueGeneratePdfEvents } from "../../helpers";
+import { queueGenerateLetterAndSend } from "../../helpers";
+import { typeUser } from "../user/typeUser";
 
 const debugError = dg("services:invoice:debug");
 
-export const generatePdf = async (
+export const generatePdf = (
   log: typeReturnInvoiceLog,
   user: typeUser
-): Promise<void> => {
+): void => {
   try {
     const allPrice = log.listOfWorks.reduce(
       (prev, price) => prev + price.price,
@@ -24,8 +27,16 @@ export const generatePdf = async (
       number: log.number,
       listOfWorks: log.listOfWorks,
     };
-    await queueGeneratePdf.add("pdf", {
+    queueGeneratePdf.add("pdf", {
       customer,
+    });
+    queueGeneratePdfEvents.on("completed", (data) => {
+      Job.fromId(queueGeneratePdf, data.jobId).then((data) => {
+        queueGenerateLetterAndSend.add("send", {
+          email: data.data.customer.email,
+          number: data.data.customer.number,
+        });
+      });
     });
   } catch (error) {
     debugError(`Error generate services: ${error.message}`);

@@ -3,7 +3,7 @@ import {
   typeInvoiceLogController,
   typeReturnInvoiceLog,
 } from "./typeInvoiceLog";
-import { InvoiceLog } from "../../models";
+import { InvoiceLoggerUser, InvoiceLoggerWorkers } from "../../models";
 
 const debugError = dg("services:invoiceLog:debug");
 
@@ -12,13 +12,21 @@ export const loggingAnInvoice = async ({
   listOfWorks,
 }: typeInvoiceLogController): Promise<typeReturnInvoiceLog> => {
   try {
-    const data = await InvoiceLog.create({ email, listOfWorks });
-    const number = await InvoiceLog.find().countDocuments();
+    const data = await InvoiceLoggerUser.create({ email }, { raw: true });
+    const { id, createdAt } = data;
+    for (const el of listOfWorks) {
+      await InvoiceLoggerWorkers.create({
+        // bulkCreate
+        loggerUserId: id,
+        project: el.project,
+        price: el.price,
+      });
+    }
     const newData = {
-      number,
-      email: data.email,
-      listOfWorks: data.listOfWorks,
-      createdAt: data.createdAt,
+      number: id,
+      email,
+      listOfWorks,
+      createdAt,
     };
     return newData;
   } catch (error) {

@@ -2,19 +2,17 @@ import "../config";
 import "../db";
 import { User } from "../models";
 
-import { users } from "./users";
-
-const importData = async () => {
-  try {
-    await User.deleteMany();
-
-    await User.insertMany(users);
-
-    console.log("data Imported");
-    process.exit();
-  } catch (e) {
-    console.log(e);
-    process.exit(1);
-  }
+export const initializingDatabase = () => {
+  User.create({
+    email: "bugrom@mail.ru",
+    firstName: "Tom",
+    lastName: "Hard",
+    emailCompany: "google.com",
+    addressCompany: "Address st",
+    nameCompany: "Google",
+  })
+    .then(() => console.log("data add"))
+    .catch((e) => console.log("Error", e));
 };
-importData();
+
+initializingDatabase();

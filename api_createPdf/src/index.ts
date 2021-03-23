@@ -17,13 +17,6 @@ const createPdfWorker = new Worker(
   { connection }
 );
 
-createPdfWorker.on("completed", (data) => {
-  queueGenerateLetterAndSend.add("send", {
-    email: data.data.customer.email,
-    number: data.data.customer.number,
-  });
-});
-
 createPdfWorker.on("failed", (data) => {
   debug(`Error ${data.error}`);
 });

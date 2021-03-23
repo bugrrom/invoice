@@ -1,13 +1,13 @@
-import { typeInvoiceLog } from "../../models";
+import { typeLoggerUser, typeLoggerWorkers } from "../../models";
 
 export type typeInvoiceLogController = {
-  email: typeInvoiceLog["email"];
-  listOfWorks: typeInvoiceLog["listOfWorks"];
+  email: typeLoggerUser["email"];
+  listOfWorks: typeLoggerWorkers[];
 };
 
 export type typeReturnInvoiceLog = {
-  email: typeInvoiceLog["email"];
-  listOfWorks: typeInvoiceLog["listOfWorks"];
+  email: typeLoggerUser["email"];
+  listOfWorks: typeLoggerWorkers[];
   number: number;
   createdAt: string;
 };

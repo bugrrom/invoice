@@ -1,7 +1,7 @@
 import { ValidationError } from "../errors";
 
 export const getDbName = () => {
-  const { DB_NAME } = process.env;
+  const DB_NAME = process.env.DB_NAME || "invoice";
   if (!DB_NAME) {
     throw new ValidationError(
       "Environment variable DB_NAME should be specified"

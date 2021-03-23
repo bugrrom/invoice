@@ -9,21 +9,19 @@ services:
       - 4000:4000
     environment:
       - PORT=4000
-      - DB_URL=mongodb://api_db:27017
+      - DB_URL=postgres://user:123456789@postgres_db:5432/invoice
       - REDIS=redis://cache
-      - EMAIL=
-    depends_on:
-      - redis_db
-      - api_db
     networks:
       - invoice-network
+    depends_on:
+      - redis_db
+      - postgres_db
 
   api_create_pdf:
     build: ./api_createPdf
     command: npm run start
     restart: unless-stopped
     environment:
-      - DB_URL=mongodb://api_db:27017
       - REDIS=redis://cache
     depends_on:
       - api
@@ -38,10 +36,9 @@ services:
     command: npm run start
     restart: unless-stopped
     environment:
-      - DB_URL=mongodb://api_db:27017
       - REDIS=redis://cache
-      - API_KEY_MAILGAN=
-      - DOMAIN_MAILGAN=
+      - API_KEY_MAILGAN=33e81353986c5590c2296802c00ea53b-73e57fef-835957c8
+      - DOMAIN_MAILGAN=sandboxff937e9201a1427eb3f0ea3ebee091ac.mailgun.org
     depends_on:
       - api
       - redis_db
@@ -58,11 +55,15 @@ services:
     networks:
       - invoice-network
 
-  api_db:
-    image: mongo:latest
-    container_name: invoice-api-db
-    ports:
-    - 27017:27017
+  postgres_db:
+    image: postgres:13.2-alpine
+    container_name: postgres_db
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=123456789
+      - POSTGRES_DB=invoice
+    expose:
+      - 5432
     networks:
       - invoice-network
 
